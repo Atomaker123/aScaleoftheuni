@@ -1,0 +1,13 @@
+{
+  "include": [
+    "src/**/*"
+  ],
+  "compilerOptions": {
+      "noImplicitAny": false,
+      "target": "es2015",
+      "sourceMap": true,
+      "baseUrl": ".",
+      "rootDir": "src",
+      "moduleResolution": "node"
+  }
+}

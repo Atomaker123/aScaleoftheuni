@@ -62,7 +62,6 @@ export class Item extends Entity {
             this.cull(scale, this.sizeData);
             this.container.scale = new PIXI.Point(scale, scale);
             this.currentScale = scale;
-            // this.text.opacity = Math.min(0, scaleExp);
         }
         else {
             const scaleExp = this.scaleExp - globalZoomExp;
@@ -123,10 +122,9 @@ export class Item extends Entity {
         const here = this;
         function onButtonDown() {
             here.onClick(here);
-            // sa_event("item_" + here.sizeData.objectID.toString());
         }
         sprite.hitArea = new PIXI.Polygon(points);
-        sprite.buttonMode = true; //false makes mouse cursor not change when on item
+        sprite.buttonMode = true; 
         sprite.interactive = true;
         sprite.on("mousedown", onButtonDown).on("touchstart", onButtonDown);
     }

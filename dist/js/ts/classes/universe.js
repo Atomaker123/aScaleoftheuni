@@ -35,19 +35,16 @@ export class Universe {
         this.container.sortableChildren = false;
         this.app.renderer.plugins.interaction.on("mousedown", (e) => {
             if (!e.target) {
-                // if clicked outside of any items
                 this.unHideItems();
             }
         });
         document.addEventListener("mousewheel", (e) => {
             this.unHideItems();
         }, false);
-        // center the rings charlez
         this.container.x = this.app.screen.width / 2;
         this.container.y = this.app.screen.height / 2;
         this.container.pivot.x = this.container.width / 2;
         this.container.pivot.y = this.container.height / 2;
-        // center the rings charlez for display (HACKY)
         this.displayContainer.x = this.app.screen.width / 2;
         this.displayContainer.y = this.app.screen.height / 2;
         this.displayContainer.pivot.x = this.displayContainer.width / 2;
@@ -65,7 +62,6 @@ export class Universe {
         this.unHideItems();
     }
     setLanguage() {
-        // for (this.items) this.slider.createText();
     }
     hydrateHighTextures(textures) {
         const is = this.items;
@@ -107,7 +103,6 @@ export class Universe {
     hideAllItemsBut(item) {
         if (this.selectedItem !== item) {
             if (this.selectedItem) {
-                // clear if selectedItem exists
                 this.displayContainer.removeChild(this.selectedItem.getContainer());
                 while (this.displayContainer.children[0]) {
                     this.displayContainer.removeChildAt(0);
@@ -121,15 +116,12 @@ export class Universe {
             this.displayContainer.addChild(item.getContainer());
             this.selectedItem = item;
             this.selectedItem.text.visible = false;
-            // TweenMax.to(this.container, 2, { pixi: { blurFilter: 15 } });
             const filter = new KawaseBlurFilter(1, 3, true);
             this.container.filters = [filter];
             this.displayContainer.visible = true;
             for (const otherItem of this.items.filter(x => x !== item)) {
-                // hide all other descriptions
                 otherItem.hideDescription();
                 otherItem.text.renderable = true;
-                // otherItem.container.alpha = .5
             }
         }
         else {
@@ -141,12 +133,11 @@ export class Universe {
         const absoluteZoom = item.scaleExp + Math.log10(item.coeff * item.realRatio);
         const percent = map(absoluteZoom + zoomOffset, -35, 27, 0, 1);
         this.hideAllItemsBut(item);
-        // this.container.setChildIndex(item.container, this.items.length + this.rings.length - 2);
         let percentFinal = 0;
-        if (window.innerHeight < 750) { // 720p
+        if (window.innerHeight < 750) { 
             percentFinal = percent + 0.0065;
         }
-        else { // 1080p
+        else { 
             percentFinal = percent + 0.004;
         }
         this.slider.setAnimationTargetPercent(percentFinal);
@@ -189,7 +180,6 @@ export class Universe {
                 const visualLocation = visualLocations[idx];
                 const padded = pad(idx + 1, 3);
                 const textureLow = lowTextures.assetsLow.textures[padded + "_quarter"];
-                // items above 29 are all normal items
                 if (idx >= 29) {
                     textDatum.title = textData[(idx - 29) * 2];
                     textDatum.description = textData[(idx - 29) * 2 + 1];
@@ -198,9 +188,8 @@ export class Universe {
                     this.container.addChild(item.getContainer());
                 }
                 else if (idx < 17) {
-                    // below 17 are rings 17
                     let prefix = textData[idx + 602] || "";
-                    idx !== 16 ? prefix = prefix.substring(0, prefix.length - 1) : ''; //remove new line
+                    idx !== 16 ? prefix = prefix.substring(0, prefix.length - 1) : ''; 
                     textDatum.title = "1 " + prefix + meterText;
                     textDatum.description = getScaleText(sizeData.exponent) + " m";
                     const ring = new Ring(idx, sizeData, textureLow, visualLocation, textDatum, meterPluralText);
@@ -208,8 +197,6 @@ export class Universe {
                     this.container.addChild(ring.getContainer());
                 }
                 else {
-                    // let prefix = textData[idx+602] || '';
-                    // prefix = prefix.substring(0, prefix.length-1) //remove new line
                     let val;
                     let unitPrefix = textData[602];
                     if (idx <= 26) {

@@ -17,7 +17,6 @@ export class Entity {
         spriteLow.anchor.set(0.5, 0.5);
         this.container.scale = new PIXI.Point(scale, scale);
         this.spriteLow = spriteLow;
-        // default visibility
         this.spriteLow.visible = true;
         this.container.addChild(this.spriteLow);
     }
@@ -42,8 +41,6 @@ export class Entity {
         this.spriteLow.visible = qualityIndex === 0;
     }
     clearHighTexture() {
-        // this.sprite ? this.sprite.destroy() : 'boop';
-        // this.sprite = null
         this.setItemQuality(false);
         this.setQuality(0);
     }
@@ -54,11 +51,7 @@ export class Entity {
         this.spriteLow.visible = !this.isHighQuality;
     }
     cull(scale, sizeData) {
-        //E(3) => 10^3
-        // basic culling :)
-        // if ((scale < .001 || scale > 12) && !this.cachePeriod) {
         if (scale < 0.001 || scale > 12) {
-            // if (scale < (E(-6)) || scale > E(1)) {
             this.container.renderable = false;
             this.culled = true;
         }
@@ -66,7 +59,6 @@ export class Entity {
             this.container.renderable = true;
             this.culled = false;
         }
-        // low-res for distant objects. Hacked into cull :)
         if (scale < 0.075 || !this.isHighQuality) {
             this.setQuality(0);
         }

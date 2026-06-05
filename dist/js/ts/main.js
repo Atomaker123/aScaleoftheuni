@@ -20,25 +20,6 @@ let hasPickedLang = false;
 let allHighTextures;
 const titles = [
     'The Scale of the Universe 2',
-    'סדרי גודל ביקום',
-    'De schaal van het Universum',
-    'The Scale of the Universe 2',
-    '宇宙的刻度',
-    'La Escala del Universo 2',
-    'Universums Skala',
-    'Rozmiar Wszechświata',
-    'A Escala do Universo',
-    'Die Proportionen des Universums',
-    '宇宙的刻度',
-    "L'échelle de l'Univers",
-    'La Skalo de la Universo',
-    'Scala Universului',
-    'Розмір Всесвіту',
-    'ﻥﻮﻜﻟﺍ ﺱﺎﻴﻘﻣ',
-    '우주의 규모',
-    'Universumi ulatus',
-    'ابعاد جهان 2',
-    'Evren Ölçeði 2'
 ];
 const titleEl = document.getElementById("title");
 const hoverTitleEl = document.getElementById("hoverTitle");
@@ -60,17 +41,7 @@ function showTitle() {
     hoverTitleEl.style.display = 'none';
 }
 const dialogPolyfill = require("dialog-polyfill");
-// PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
-// PIXI.settings.RESOLUTION = 2;
 const staticHostingURL = "https://d1w6pmjy03071n.cloudfront.net";
-const frozenStar = new Howl({
-    src: [
-        `${staticHostingURL}/frozen_star.webm`,
-        `${staticHostingURL}/frozen_star.mp3`
-    ],
-    loop: true,
-    volume: 0.5
-});
 let isHQ = true;
 let hasHQ = false;
 const fadeInApp = new Tweenable();
@@ -81,14 +52,6 @@ fadeInApp.setConfig({
     duration: 2500,
     step: state => (frame.style.opacity = state.opacity)
 });
-console.log(`
-  Scale of the Universe 2.1
-
-  Created by Cary Huang
-  Implemented by Matthew Martori @matttt on github
-  
-  Made with ♥️
-`);
 if (isMobile(window.navigator).phone) {
     alert('This version of Scale of the Universe 2 is not designed for phones. Please find the app on the iOS app store.');
     document.write('Download the Scale of the Universe iOS app!');
@@ -96,7 +59,6 @@ if (isMobile(window.navigator).phone) {
 }
 ;
 const modal = document.getElementById("modal");
-// modal.showModal();
 let n = 0;
 const fadeOut = new Tweenable();
 fadeOut.setConfig({
@@ -137,12 +99,10 @@ const langWrapper = document.getElementById("langWrapper");
 const startWrapper = document.getElementById("startWrapper");
 const loader = new PIXI.Loader();
 loader.add("assetsLow", `${staticHostingURL}/quarter_items-0-main.json`);
-// loader.add('assets1', '/img/new/item_textures_0_quarter.json')
 dialogPolyfill.registerDialog(modal);
 const globalResolution = 1;
 const loadingSpin = document.getElementById("loadingSpin");
 loader.load((loader, resources) => __awaiter(void 0, void 0, void 0, function* () {
-    // document.getElementById('loadingBar').style.visibility = 'hidden';
     loadingSpin.visibility = 'hidden';
     loadingSpin.remove();
     langWrapper.style.visibility = 'visible';
@@ -151,17 +111,14 @@ loader.load((loader, resources) => __awaiter(void 0, void 0, void 0, function* (
         app = new PIXI.Application({
             width: frame.offsetWidth,
             height: frame.offsetHeight,
-            // backgroundColor: 0xffffff,
             antialias: true,
             transparent: true,
-            // autoDensity: true,
             powerPreference: "high-performance",
             resolution: globalResolution,
             forceFXAA: true,
             sharedTicker: true,
             resizeTo: sotuFrame
         });
-        // app.view.style.zindex = '200'
     }
     catch (err) {
         console.log(err);
@@ -170,7 +127,6 @@ loader.load((loader, resources) => __awaiter(void 0, void 0, void 0, function* (
             height: frame.offsetHeight,
             backgroundColor: 0xffffff,
             antialias: true,
-            // autoDensity: true,
             forceCanvas: true,
             transparent: true,
             resolution: globalResolution
@@ -205,14 +161,13 @@ loader.load((loader, resources) => __awaiter(void 0, void 0, void 0, function* (
     const spaceBg = document.getElementById('spaceBgImage');
     const earthBg = document.getElementById('earthBgImage');
     function onChange(x, percent) {
-        let scaleExp = percent * 62 - 35; //range of 10^-35 to 10^27
+        let scaleExp = percent * 62 - 35; 
         scaleText.setColor(scaleExp);
         if (scaleExp > 5 && scaleExp < 7) {
             let opacity = map(scaleExp, 5, 7, 0.1, 100);
             let opacityNorm = opacity / 100;
             buttons.style.filter = `invert(${opacity}%)`;
             spaceBg.style.opacity = `${opacityNorm}`;
-            // earthBg.style.opacity = `${1 - opacityNorm}`;
         }
         else {
             if (buttons.style.filter)
@@ -250,7 +205,6 @@ loader.load((loader, resources) => __awaiter(void 0, void 0, void 0, function* (
             }
         }
         startWrapper.style.display = 'block';
-        // start us at scale 0
         slider.setPercent(map(0.1, -35, 27, 0, 1));
         app.stage.addChild(universe.container, slider.container, scaleText.container, universe.displayContainer);
         sotuFrame.appendChild(app.view);
@@ -268,10 +222,8 @@ loader.load((loader, resources) => __awaiter(void 0, void 0, void 0, function* (
         const translationCredit = document.querySelector('#translationCredit');
         startButton.innerHTML = startButtonText;
         translationCredit.innerHTML = translationCreditText;
-        // document.getElementById('startBtn').innerHTML = textData[619]
         document.getElementById('moveSliderText').innerHTML = textData[620];
         document.getElementById('clickObjectText').innerHTML = textData[621];
-        // document.getElementById('startTitle').innerHtml = textData[619]
         yield universe.createItems(resources, textData);
         slider.setPercent(map(0, -35, 27, 0, 1));
         universe.prevZoom = 0;
@@ -287,7 +239,3 @@ loader.load((loader, resources) => __awaiter(void 0, void 0, void 0, function* (
         };
     });
 }));
-// let loadingBar = new ldBar("#loadingBar");
-// loader.onLoad.add(() => {
-//   loadingBar.set(loader.progress)
-// });

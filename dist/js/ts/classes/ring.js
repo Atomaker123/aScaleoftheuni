@@ -74,7 +74,6 @@ export class Ring extends Entity {
             wordWrapWidth: 1000,
             breakWords: false
         };
-        //make method
         let textStyle = Object.assign(Object.assign({}, baseStyle), { fontSize: 60 });
         let expTextStyle = Object.assign(Object.assign({}, baseStyle), { fontSize: 40 });
         let descriptionStyle = Object.assign({}, baseStyle);
@@ -84,10 +83,7 @@ export class Ring extends Entity {
             expTextStyle.fill = 0xdddddd;
             descriptionStyle.fill = 0xdddddd;
         }
-        //literally done. users will run a couple regexes. 
         const titleNoNewLine = this.textDatum.title.replace(/(\r\n|\n|\r)/gm, '');
-        // const expText = this.sizeData.exponent;
-        // const expTextFmtd = numToSup(expText);
         const exponentText = new PIXI.Text(`10^${this.sizeData.exponent} ${this.meterPlural}`, expTextStyle);
         const expTextContainer = new PIXI.Container();
         this.text = new PIXI.Text(titleNoNewLine, textStyle);
@@ -95,9 +91,7 @@ export class Ring extends Entity {
         this.text.cacheAsBitmap = false;
         exponentText.position.x = 0;
         exponentText.position.y = -225;
-        // exponentText.anchor.set(0.5, 0);
         expTextContainer.addChild(exponentText);
-        // expTextContainer.addChild(exponentText, expText, unitText)
         expTextContainer.position.x -= expTextContainer.width / 2;
         this.text.position.x = 0;
         this.text.position.y = -300;

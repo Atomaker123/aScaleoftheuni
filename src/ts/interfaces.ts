@@ -4,7 +4,6 @@ export interface textDatum {
   metersPlural: string;
   meterSingular: string;
 }
-
 export interface VisualLocation {
   boundX: number;
   boundY: number;
@@ -19,7 +18,6 @@ export interface VisualLocation {
   descriptionScale?: number;
   zoomOffset?: number;
 }
-
 export interface SizeData {
   objectID: number;
   exponent: number;
@@ -27,7 +25,6 @@ export interface SizeData {
   cullFac: number;
   realRatio: number;
 }
-
 export interface ExtraText {
   centimeter: string;
   centimeters: string;

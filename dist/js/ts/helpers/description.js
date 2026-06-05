@@ -22,19 +22,15 @@ export function getGraphics(visualLocation, textDatum, extraText, units, sizeDat
     const descriptionStyle = Object.assign(Object.assign({}, baseStyle), { fontSize: 32 });
     const friendly = powToUnit(sizeData, units, extraText);
     const splitDescription = descriptionSplitter(textDatum.description).replace(/",/g, '');
-    // DEBUG MODE: object id beside description title VVVV
-    // const titleText = new PIXI.Text(textDatum.title.replace(/\r?\n|\r/g, ' ') + sizeData.objectID, titleStyle);
     const titleText = new PIXI.Text(textDatum.title.replace(/\r?\n|\r/g, ''), titleStyle);
     const scaleText = new PIXI.Text(`${sizeData.coeff} x 10`, scaleStyle);
     const exponentText = new PIXI.Text(`${sizeData.exponent}`, exponentStyle);
     const meterText = new PIXI.Text(textDatum.metersPlural, scaleStyle);
     const unitFriendlyText = new PIXI.Text(friendly, unitFriendlyStyle);
     const descriptionText = new PIXI.Text('    ' + splitDescription, descriptionStyle);
-    // const descriptionText = new PIXI.Text(sizeData.objectID + ' ' + splitDescription, descriptionStyle);
     titleText.x = x + margin;
     titleText.y = y + margin;
     titleText.roundPixels = true;
-    // ------------------
     scaleText.x = x + margin;
     scaleText.y = y + titleText.height + unitFriendlyText.height - 5 + 35;
     scaleText.roundPixels = true;
@@ -44,7 +40,6 @@ export function getGraphics(visualLocation, textDatum, extraText, units, sizeDat
     meterText.x = x + margin + 2.5 + scaleText.width + exponentText.width + 5;
     meterText.y = y + titleText.height + unitFriendlyText.height - 5 + 35;
     meterText.roundPixels = true;
-    // -----------------
     unitFriendlyText.x = x + margin;
     unitFriendlyText.y = y + titleText.height - 10 + 35;
     unitFriendlyText.roundPixels = true;
@@ -54,13 +49,10 @@ export function getGraphics(visualLocation, textDatum, extraText, units, sizeDat
     const descriptionContainer = new PIXI.Container();
     const graphics = new PIXI.Graphics();
     const totalTextHeight = titleText.height + descriptionText.height + scaleText.height + unitFriendlyText.height + 10 + 35;
-    //shadow
     graphics.beginFill(0x000000, .2);
     graphics.drawRoundedRect(x + 5, y + 5, w, totalTextHeight, 15);
     graphics.endFill();
-    // set a fill and a line style again and draw a rectangle
     graphics.lineStyle(2, 0xaaaaaa, 1);
-    // graphics.beginFill(0x999999, 1);
     graphics.beginFill(0xFFFFFF, 1);
     let widthToUse = w;
     if (unitFriendlyText.width + 30 >= widthToUse) {

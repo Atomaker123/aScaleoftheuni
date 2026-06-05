@@ -3,7 +3,6 @@ import * as PIXI from "pixi.js-legacy";
 import { map } from '../helpers/map';
 export class ScaleText {
     constructor(x, y, text) {
-        // flipped I know... in a big hurry
         this.textColor = 0x000000;
         this.textColorSpace = 0xFFFFFF;
         this.baseTextGround = new PIXI.Text('10', {

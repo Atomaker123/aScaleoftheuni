@@ -15,12 +15,10 @@ export function background(bgSize, inputSprite, type, forceSize) {
     let scale = 1;
     let pos = new Point(0, 0);
     if (type == 'cover' ? (winratio > spratio) : (winratio < spratio)) {
-        //photo is wider than background
         scale = bgSize.x / sp.x;
         pos.y = -((sp.y * scale) - bgSize.y) / 2;
     }
     else {
-        //photo is taller than background
         scale = bgSize.y / sp.y;
         pos.x = -((sp.x * scale) - bgSize.x) / 2;
     }

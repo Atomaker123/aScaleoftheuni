@@ -43,8 +43,8 @@ window['revealTitle'] = () => {
   hoverTimeout = setTimeout(showTitle, 1000);
 }
 function showTitle () {
-  titleEl.style.display = 'block';
-  hoverTitleEl.style.display = 'none'
+  if (titleEl) titleEl.style.display = 'block';
+  if (hoverTitleEl) hoverTitleEl.style.display = 'none';
 }
 const staticHostingURL = "http://localhost:3000";
 let isHQ = true;
@@ -190,14 +190,10 @@ loader.load(async (loader, resources) => {
       langWrapper.style.visibility = "hidden";
       langWrapper.remove();
     }
-    titleEl.innerHTML = textData[619]
-    titleEl.style.opacity = '1';
-    const startButtonText = textData[622];
-    const translationCreditText = textData[623];
-    const startButton = document.querySelector('#startBtn');
-    const translationCredit = document.querySelector('#translationCredit');
-    if (startButton) startButton.innerHTML = startButtonText;
-    if (translationCredit) translationCredit.innerHTML = translationCreditText;
+    if (titleEl) {
+      titleEl.innerHTML = textData[619];
+      titleEl.style.opacity = '1';
+    }
     const moveSliderTextEl = document.getElementById('moveSliderText');
     const clickObjectTextEl = document.getElementById('clickObjectText');
     if (moveSliderTextEl) moveSliderTextEl.innerHTML = textData[620];

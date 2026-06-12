@@ -164,6 +164,120 @@ export class Universe {
       meters: meterPluralText
     }
     const units = textData.slice(602,618);
+    const normalizeTitle = (value: string) =>
+      value
+        .trim()
+        .toLowerCase()
+        .replace(/[\u2013\u2014]/g, '-')
+        .replace(/[^a-z0-9()\- ]+/g, '')
+        .replace(/\s+/g, ' ');
+
+    const keepItemTitles = new Set<string>([
+      "Quantum Foam",
+      "String",
+      "Planck Length",
+      "Neutrino",
+      "Top Quark",
+      "High-Energy Neutrino",
+      "Bottom Quark",
+      "Charm Quark",
+      "Strange Quark",
+      "Up Quark",
+      "Down Quark",
+      "Range of the Weak Force",
+      "Lengths shorter than this are not confirmed",
+      "Proton",
+      "Neutron",
+      "Electron (Classical)",
+      "Uranium Nucleus",
+      "Gamma Ray Wavelength",
+      "Hydrogen Atom",
+      "Water Molecule",
+      "X-Ray Wavelength",
+      "Glucose Molecule",
+      "Buckyball",
+      "DNA",
+      "Transistor Gate",
+      "Ultraviolet Wavelength",
+      "Smallest Thing Visible to an Optical Microscope",
+      "Red Light Wavelength",
+      "X Chromosome",
+      "Mitochondrion",
+      "Red Blood Cell",
+      "Cell Nucleus",
+      "Chloroplast",
+      "White Blood Cell",
+      "Infrared Wavelength",
+      "Skin Cell",
+      "Smallest Object Visible to the Naked Eye",
+      "Width of Human Hair",
+      "Thickness of Paper",
+      "LCD Pixel",
+      "Amoeba",
+      "Grain of Sand",
+      "Ant",
+      "Grain of Rice",
+      "Coffee Bean",
+      "Microwave Wavelength",
+      "Glass Marble",
+      "Matchstick",
+      "Chicken Egg",
+      "Hummingbird",
+      "Basketball",
+      "FM Radio Wavelength",
+      "Human",
+      "Giant Earthworm",
+      "Elephant",
+      "Giraffe",
+      "Tyrannosaurus Rex",
+      "Oak Tree",
+      "Blue Whale",
+      "Boeing 747",
+      "The Great Pyramid of Giza",
+      "Eiffel Tower",
+      "Vatican City",
+      "Burj Khalifa",
+      "AM Radio Wavelength",
+      "Large Hadron Collider",
+      "Mount Everest",
+      "Depth of the Mariana Trench",
+      "Neutron Star",
+      "Brunei",
+      "Rwanda",
+      "Pluto",
+      "The Moon",
+      "Mercury",
+      "Mars",
+      "Asia",
+      "Great Wall of China",
+      "Venus",
+      "Earth",
+      "Neptune",
+      "Uranus",
+      "Minecraft World",
+      "Saturn",
+      "Jupiter",
+      "Distance from Earth to Moon",
+      "The Sun",
+      "Total Human Height",
+      "Distance from Earth to Sun",
+      "Betelgeuse",
+      "Homunculus Nebula",
+      "Light-Day",
+      "Light-Year",
+      "Helix Nebula",
+      "Parsec",
+      "Distance from the Sun to Proxima Centauri",
+      "Orion Nebula",
+      "Barnard's Loop",
+      "Triangulum Galaxy",
+      "Milky Way",
+      "Andromeda Galaxy",
+      "The Distance Earth Has Travelled (Relative to Sun)",
+      "Observable Universe",
+      "Universe"
+    ].map(normalizeTitle));
+
     const onClick = (item: Item) => {
       this.itemClicked(item);
     };
@@ -182,6 +296,9 @@ export class Universe {
       if (idx >= 29) {
         textDatum.title = textData[(idx - 29) * 2];
         textDatum.description = textData[(idx - 29) * 2 + 1];
+        if (!keepItemTitles.has(normalizeTitle(textDatum.title))) {
+          continue;
+        }
         const item = new Item(
           sizeData,
           textureLow,
@@ -257,5 +374,6 @@ export class Universe {
         this.container.addChild(ring.getContainer());
       }
     }
+    this.itemCount = this.items.length;
   }
 }

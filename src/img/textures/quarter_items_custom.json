@@ -1,0 +1,35 @@
+{
+  "frames": {
+    "328_quarter": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 400,
+        "h": 400
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 400,
+        "h": 400
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 400
+      }
+    }
+  },
+  "meta": {
+    "app": "custom_item_script",
+    "version": "1.0",
+    "image": "quarter_items_custom.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 400,
+      "h": 400
+    },
+    "scale": "0.25"
+  }
+}

@@ -275,7 +275,8 @@ export class Universe {
       "Andromeda Galaxy",
       "The Distance Earth Has Travelled (Relative to Sun)",
       "Observable Universe",
-      "Universe"
+      "Universe",
+      "cricket ball"
     ].map(normalizeTitle));
 
     const onClick = (item: Item) => {

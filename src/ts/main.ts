@@ -67,6 +67,7 @@ const langWrapper = document.getElementById("langWrapper");
 const startWrapper = document.getElementById("startWrapper");
 const loader = new PIXI.Loader();
 loader.add("assetsLow", `img/textures/quarter_items-0-main.json`);
+  loader.add("assetsCustom", `img/textures/quarter_items_custom.json`);
 const globalResolution = 1;
 const loadingSpin:any = document.getElementById("loadingSpin");
 loader.load(async (loader, resources) => {
@@ -111,6 +112,8 @@ loader.load(async (loader, resources) => {
   const highJSONCount = 5;
   for (let i = 0; i <= highJSONCount; i++) {
     highLoader.add(`main${i}`, `img/textures/new_items_${i}.json`);
+      // === CUSTOM ITEM TEXTURES ===
+      highLoader.add("mainCustom", `img/textures/new_items_custom.json`);
   }
   highLoader.load(async (highLoader, highResources) => {
     const hqToggle:any = document.querySelector('#hqToggle');
@@ -198,6 +201,14 @@ loader.load(async (loader, resources) => {
     const clickObjectTextEl = document.getElementById('clickObjectText');
     if (moveSliderTextEl) moveSliderTextEl.innerHTML = textData[620];
     if (clickObjectTextEl) clickObjectTextEl.innerHTML = textData[621];
+        // === CUSTOM ITEM TEXTURES ===
+    // Merge custom low textures into the main textures object
+    if (resources.assetsCustom && resources.assetsCustom.textures) {
+      resources.assetsLow.textures = {
+        ...resources.assetsLow.textures,
+        ...resources.assetsCustom.textures
+      };
+    }
     await universe.createItems(resources, textData);
     slider.setPercent(map(0, -35, 27, 0, 1));
     universe.prevZoom = 0;
